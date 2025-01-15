@@ -22,8 +22,10 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"fmt"
 	"os"
 
+	"github.com/alecthomas/chroma/v2/quick"
 	"github.com/apex/log"
 	clihander "github.com/apex/log/handlers/cli"
 	"github.com/blacktop/go-idalib"
@@ -57,16 +59,29 @@ var rootCmd = &cobra.Command{
 			log.Fatalf("Failed to initialize IDA library: %d", ret)
 		}
 
+		if verbose {
+			ida.EnableConsoleMessages(true)
+		}
+
 		if ret := ida.OpenDatabase(args[0], false); ret != 0 {
 			log.Fatalf("Failed to open database: %d", ret)
 		}
 		defer ida.CloseDatabase(true)
 
-		var major, minor, build int
-		if !ida.GetLibraryVersion(&major, &minor, &build) {
-			log.Fatal("Failed to get library version")
+		// count := ida.FuncCount()
+		log.Infof("Function count: %d", ida.FuncCount())
+
+		fn := ida.GetFuncByID(0)
+		log.Infof("1st Function: %#v", fn)
+
+		dec := ida.DecompileFunction(fn)
+		if dec == "" {
+			log.Fatal("Failed to decompile function")
 		}
-		log.Infof("IDA library version: %d.%d.%d", major, minor, build)
+		fmt.Println("Decompiled Function:")
+		if err := quick.Highlight(os.Stdout, dec, "c", "terminal256", "nord"); err != nil {
+			log.Fatalf("failed to highlight json: %v", err)
+		}
 	},
 }
 

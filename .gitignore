@@ -26,4 +26,6 @@ go.work.sum
 
 # IDA SDK
 idasdk90
-ida
+
+# build
+ida_tool

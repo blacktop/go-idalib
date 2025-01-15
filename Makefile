@@ -7,7 +7,7 @@ bump:
 .PHONY: build
 build:
 	@echo "🚀 Building Version $(shell svu current)"
-	@cd cmd/ida; go build -o ../../ida main.go
+	@cd cmd/ida; go build -o ../../ida_tool main.go
 
 .PHONY: clean
 clean:

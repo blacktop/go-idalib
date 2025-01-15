@@ -1,3 +1,4 @@
+#include <iostream>
 #include "goidalib.hpp"
 
 // Implementation of IDA library functions
@@ -30,14 +31,40 @@ bool IDALib::GetLibraryVersion(int &major, int &minor, int &build) {
     return get_library_version(major, minor, build);
 }
 
-// strvec_t IDALib::DecompileFunction(func_t *f) {
-//   hexrays_failure_t failure;
-//   cfuncptr_t cf = decompile_func(f, &failure, 0);
-//   if (cf == nullptr) {
-//     throw failure;
-//   }
-//   return cf->get_pseudocode();
-// }
+int IDALib::FuncCount() {
+    return get_func_qty();
+}
+
+func_t *IDALib::GetFuncByID(int id) {
+    return getn_func(id);
+}
+
+func_t *IDALib::GetFunc(uint64 ea) {
+    return get_func(ea_t(ea));
+}
+
+std::string IDALib::DecompileFunction(func_t *pfn) {
+  hexrays_failure_t hf;
+  cfuncptr_t cfunc = decompile(pfn, &hf, DECOMP_WARNINGS);
+  if ( cfunc == nullptr )
+  {
+    warning("#error \"%a: %s", hf.errea, hf.desc().c_str());
+    return "#error " + std::to_string(hf.errea) + ": " + hf.desc().c_str();
+  }
+  msg("%a: successfully decompiled\n", pfn->start_ea);
+
+  std::string decompiled_code;
+  const strvec_t &sv = cfunc->get_pseudocode();
+  for ( int i=0; i < sv.size(); i++ )
+  {
+    qstring buf;
+    tag_remove(&buf, sv[i].line);
+    decompiled_code += buf.c_str();
+    decompiled_code += "\n";
+  }
+
+  return decompiled_code;
+}
 
 IDALib::IDALib() {
     // Constructor implementation

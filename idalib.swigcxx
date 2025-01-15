@@ -3,4 +3,5 @@
 #include "goidalib.hpp"
 %}
 
+%include "std_string.i"
 %include "goidalib.hpp"
