@@ -2,7 +2,12 @@
 
 > Go bindings for the IDA 9.0 SDK
 
-> [!WARNING] NEED HELP  
+## Why? 🤔
+
+Everyone deserves bindings, even gophers!
+
+> [!WARNING] 
+> **NEED HELP**  
 > With fleshing out the rest of the objects like Function etc and library C++ wrappers to get to a MVP.
 
 
