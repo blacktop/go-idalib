@@ -1,0 +1,6 @@
+%module idalib
+%{
+#include "hexrays.hpp"
+#include "ida.hpp"
+#include "idalib.hpp"
+%}
