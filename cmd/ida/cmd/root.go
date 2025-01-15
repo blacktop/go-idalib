@@ -61,6 +61,12 @@ var rootCmd = &cobra.Command{
 			log.Fatalf("Failed to open database: %d", ret)
 		}
 		defer ida.CloseDatabase(true)
+
+		var major, minor, build int
+		if !ida.GetLibraryVersion(&major, &minor, &build) {
+			log.Fatal("Failed to get library version")
+		}
+		log.Infof("IDA library version: %d.%d.%d", major, minor, build)
 	},
 }
 

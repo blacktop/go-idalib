@@ -30,6 +30,15 @@ bool IDALib::GetLibraryVersion(int &major, int &minor, int &build) {
     return get_library_version(major, minor, build);
 }
 
+// strvec_t IDALib::DecompileFunction(func_t *f) {
+//   hexrays_failure_t failure;
+//   cfuncptr_t cf = decompile_func(f, &failure, 0);
+//   if (cf == nullptr) {
+//     throw failure;
+//   }
+//   return cf->get_pseudocode();
+// }
+
 IDALib::IDALib() {
     // Constructor implementation
 }

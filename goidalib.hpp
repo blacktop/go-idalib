@@ -1,6 +1,7 @@
 #include <pro.h>
 #include <ida.hpp>
 #include <idalib.hpp>
+#include <hexrays.hpp>
 
 #ifndef _GOIDALIB_H_
 #define _GOIDALIB_H_
@@ -16,6 +17,7 @@ public:
     void EnableConsoleMessages(bool enable);
     void SetScreenEA(ea_t ea);
     bool GetLibraryVersion(int &major, int &minor, int &build);
+    // strvec_t DecompileFunction(func_t *f);
 };
 
 #endif // _GOIDALIB_H_
