@@ -2,6 +2,10 @@
 
 > Go bindings for the IDA 9.0 SDK
 
+> [!WARNING] NEED HELP
+> With fleshing out the rest of the objects like Function etc and library C++ wrappers to get to a MVP.
+
+
 ## Getting Started
 
 ```bash
