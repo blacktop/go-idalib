@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	github.com/apex/log v1.9.0
-	github.com/blacktop/go-idalib v0.1.0
+	github.com/blacktop/go-idalib v0.1.1
 	github.com/spf13/cobra v1.8.1
 )
 
