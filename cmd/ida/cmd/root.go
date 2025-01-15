@@ -42,7 +42,7 @@ func init() {
 var rootCmd = &cobra.Command{
 	Use:           "ida",
 	Short:         "Run ida commands",
-	Args:          cobra.ExactArgs(2),
+	Args:          cobra.ExactArgs(1),
 	SilenceErrors: true,
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -50,8 +50,17 @@ var rootCmd = &cobra.Command{
 			log.SetLevel(log.DebugLevel)
 		}
 
-		idalib.Init()
+		ida := idalib.NewIDALib()
+		defer idalib.DeleteIDALib(ida)
 
+		if ret := ida.Init(); ret != 0 {
+			log.Fatalf("Failed to initialize IDA library: %d", ret)
+		}
+
+		if ret := ida.OpenDatabase(args[0], false); ret != 0 {
+			log.Fatalf("Failed to open database: %d", ret)
+		}
+		defer ida.CloseDatabase(true)
 	},
 }
 
