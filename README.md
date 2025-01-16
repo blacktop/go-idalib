@@ -72,6 +72,10 @@ Print Version
 
 ## Development
 
+### Requirements
+
+- [swig](https://www.swig.org)
+
 Unzip IDA 9.0 SDK in root directory to build
 
 ```bash
