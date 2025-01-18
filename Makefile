@@ -12,4 +12,5 @@ build:
 .PHONY: clean
 clean:
 	@echo "🚀 Cleaning"
+	@rm -rf ida_tool
 	@go clean --cache && go build -x --work

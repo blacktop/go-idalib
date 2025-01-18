@@ -1,6 +1,6 @@
 # go-idalib
 
-> Go bindings for the IDA 9.0 SDK
+> Go bindings for the IDA 9.0 SDK via [idalib](https://docs.hex-rays.com/user-guide/idalib)
 
 ## Why? 🤔
 
@@ -15,7 +15,7 @@ Everyone deserves bindings, even gophers!
 
 ### Requirements
 
-- IDA installation (with a valid license)
+- IDA Pro 9.0 or newer installation (with a valid license)
 
 ```bash
 go get github.com/blacktop/go-idalib
@@ -69,6 +69,11 @@ Print Version
 ❯ ida version
    • IDA library version: 9.0.241217
 ```
+
+## Known Issues
+
+> [!WARNING]
+> [idalib](https://docs.hex-rays.com/user-guide/idalib) cannot function correctly when not running on the same thread that you initialized the library on.  Right now I am not doing anything to ensure Go doesn't create/switch threads so it will 'freeze' if you do anything too long/complex.
 
 ## Development
 
